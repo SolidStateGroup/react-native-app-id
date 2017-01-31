@@ -21,7 +21,7 @@ module.exports = (newID) => {
         }
 
 
-        const folder = folders && folders.find((f)=>f.indexOf('.xcodeproj'));
+        const folder = folders && folders.find((f)=>f.indexOf('.xcodeproj')>-1).replace('.xcodeproj', '');
         const plist = folders && path.resolve(process.cwd(), 'ios/' + folder + '/Info.plist');
 
         console.log('Reading', plist);
@@ -38,7 +38,7 @@ module.exports = (newID) => {
                     console.log('Found iOS bundle ID', bundleId[1]);
                     changes[plist] = markup.replace(/(<key>CFBundleIdentifier<\/key>[\s\S.]*?<string>)(.*)(<\/string>)/, '\$1' + newID + '\$3');
                 } else {
-                    reject('Could not detect')
+                    reject('Could not detect ios app id from plist')
                 }
                 resolve(changes);
             } else {
