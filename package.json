@@ -1,6 +1,6 @@
 {
   "name": "react-native-app-id",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Change the package and bundle id of any react-native project.",
   "main": "index.js",
   "scripts": {
@@ -16,15 +16,16 @@
   "peerDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kyle-ssg/react-native-simple-drawer.git"
+    "url": "git+https://github.com/kyle-ssg/react-native-app-id.git"
   },
   "bugs": {
-    "url": "https://github.com/kyle-ssg/react-native-simple-drawer/issues"
+    "url": "https://github.com/kyle-ssg/react-native-app-id/issues"
   },
-  "homepage": "https://github.com/kyle-ssg/react-native-simple-drawer#readme",
+  "bundleDependencies": false,
   "dependencies": {
     "cheerio": "^0.22.0",
     "file-exists": "^2.0.0",
     "lodash": "^4.17.4"
-  }
+  },
+  "homepage": "https://github.com/kyle-ssg/react-native-app-id#readme"
 }
