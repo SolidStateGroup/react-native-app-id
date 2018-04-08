@@ -1,30 +1,36 @@
 #!/usr/bin/env node
 
-var newID = process.argv[2];
+const newID = process.argv[2];
 var _ = require('lodash');
 var fs = require('fs');
 
-if (newID && newID.split('.').length <2) {
+if (newID && newID.split('.').length < 2) {
     console.log("Please type a valid bundle id e.g. com.solidstategroup.myapp");
     return;
 }
-Promise.all([
-    require('./src/ios')(newID),
-    require('./src/android')(newID)
-])
-    .then(function (items) {
 
-        const ios = items[0];
-        const android = items[1];
+let ios;
 
-        _.each(ios,(data, location)=> {
-            console.log("Writing", location);
-            fs.writeFileSync(location,data);
+require('./src/ios')(newID)
+    .then((res) => {
+        ios = res;
+        console.log("")
+        return require('./src/android')(newID)
+    })
+    .then(function (android) {
+        console.log("")
+
+        _.each(ios, (data, location) => {
+            console.log("IOS Writing:", location);
+            fs.writeFileSync(location, data);
+        });
+        console.log("");
+
+
+        _.each(android, (data, location) => {
+            console.log("Andrid Writing:", location);
+            fs.writeFileSync(location, data);
         });
 
-        _.each(android,(data,location)=> {
-            console.log("Writing", location);
-            fs.writeFileSync(location,data);
-        });
-
+        console.log("");
     });
